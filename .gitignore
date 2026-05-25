@@ -4,3 +4,4 @@
 build/
 cmake-build*/
 docs/superpowers/*
+.save.sh
