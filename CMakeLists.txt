@@ -61,6 +61,7 @@ add_executable(lumi_cuda_smoke
 
 add_library(lumi_core STATIC
   src/core/mock_backend.cpp
+  src/core/scheduler.cpp
 )
 
 target_include_directories(lumi_core
@@ -77,6 +78,16 @@ target_link_libraries(lumi_mock_backend_test
     lumi_core
 )
 
+add_executable(lumi_scheduler_test
+  tests/test_scheduler.cpp
+)
+
+target_link_libraries(lumi_scheduler_test
+  PRIVATE
+    lumi_core
+)
+
 add_test(NAME lumi_mock_backend_test COMMAND lumi_mock_backend_test)
+add_test(NAME lumi_scheduler_test COMMAND lumi_scheduler_test)
 add_test(NAME lumi_build_smoke COMMAND lumi_build_smoke)
 add_test(NAME lumi_cuda_smoke COMMAND lumi_cuda_smoke)
