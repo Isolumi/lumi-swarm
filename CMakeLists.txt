@@ -59,5 +59,24 @@ add_executable(lumi_cuda_smoke
   tests/test_cuda_smoke.cu
 )
 
+add_library(lumi_core STATIC
+  src/core/mock_backend.cpp
+)
+
+target_include_directories(lumi_core
+  PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+add_executable(lumi_mock_backend_test
+  tests/test_mock_backend.cpp
+)
+
+target_link_libraries(lumi_mock_backend_test
+  PRIVATE
+    lumi_core
+)
+
+add_test(NAME lumi_mock_backend_test COMMAND lumi_mock_backend_test)
 add_test(NAME lumi_build_smoke COMMAND lumi_build_smoke)
 add_test(NAME lumi_cuda_smoke COMMAND lumi_cuda_smoke)
